@@ -1,21 +1,28 @@
-const signUpLocators = require("./signUpLocators");
+const globalFormLocator = require("./globalFormLocator");
 
-class signUpPage {
+class globalFormPage {
 
     inputUsername(username) {
         cy.wait(3000);
-        cy.get(signUpLocators.input_username).should('be.visible').type(username);
+        cy.get(globalFormLocator.input_username).should('be.visible').type(username);
     }
 
     inputPassword(password) {
         cy.wait(3000);
-        cy.get(signUpLocators.input_password).should('be.visible').type(password);
+        cy.get(globalFormLocator.input_password).should('be.visible').type(password);
     }
 
-    clickSignUpBtn() {
-        cy.get(signUpLocators.button).contains('Sign up').click()
+    clickSubmitBtn(text) {
+        cy.get(globalFormLocator.button).contains(text).click()
         // cy.wait(3000);
+    }
+
+    verifyRegistrationSuccess(message){
+        cy.on('window:alert', (a) => {
+            expect(a).to.eq(message)
+        })
+        cy.wait(5000)
     }
 }
 
-module.exports = new signUpPage();
+module.exports = new globalFormPage();

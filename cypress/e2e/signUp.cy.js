@@ -1,25 +1,25 @@
+const globalFormPage = require("../support/pageObjects/globalFormPage/globalFormPage");
 const homePage = require("../support/pageObjects/homePage/homePage");
-const signUpPage = require("../support/pageObjects/signUpPage/signUpPage");
+const { faker }  = require('@faker-js/faker');
 
 describe('Sign up', () => {
-  it('Success', () => {
+
+  beforeEach(() => {
     homePage.goToHomePage();
     homePage.clickSignUpMenu();
+  })
 
-    signUpPage.inputUsername('vian1');
-    signUpPage.inputPassword('vian1');
-    signUpPage.clickSignUpBtn();
+  it('With valid data', () => {
+    globalFormPage.inputUsername(faker.person.firstName() + "123");
+    globalFormPage.inputPassword('vian123');
+  }),
+  it('With invalid data - empty input', () => {
+    globalFormPage.inputUsername("");
+    globalFormPage.inputPassword("");
+  })
 
-    // cy.wait('@signupRequest').then((interception) => {
-    //   // Verifikasi status respons
-    //   expect(interception.response.statusCode).to.eq(200);
-    //   cy.log('Signup request completed.');
-    // });
-
-    // Tangkap alert yang muncul
-    cy.on('window:alert', (alertText) => {
-      // Verifikasi teks pada alert
-      expect(alertText).to.eq('This user already exist.');
-    });
+  afterEach(() => {
+    globalFormPage.clickSubmitBtn('Sign up');
+    globalFormPage.verifyRegistrationSuccess('Sign up successful.');
   })
 })
