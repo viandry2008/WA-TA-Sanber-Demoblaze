@@ -8,6 +8,10 @@ class homePage {
         cy.get('a').contains('Sign up').click()
     }
 
+    clickLoginMenu() {
+        cy.get('a').contains('Log in').click()
+    }
+
 }
 
 module.exports = new homePage();

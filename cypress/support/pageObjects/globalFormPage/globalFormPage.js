@@ -2,14 +2,24 @@ const globalFormLocator = require("./globalFormLocator");
 
 class globalFormPage {
 
-    inputUsername(username) {
+    inputUsername(username,locator) {
         cy.wait(3000);
-        cy.get(globalFormLocator.input_username).should('be.visible').type(username);
+        cy.get(locator).should('be.visible').type(username);
     }
 
-    inputPassword(password) {
+    inputPassword(password,locator) {
         cy.wait(3000);
-        cy.get(globalFormLocator.input_password).should('be.visible').type(password);
+        cy.get(locator).should('be.visible').type(password);
+    }
+
+    inputUsernameEmpty(locator) {
+        cy.wait(3000);
+        cy.get(locator).clear();
+    }
+
+    inputPasswordEmpty(locator) {
+        cy.wait(3000);
+        cy.get(locator).clear();
     }
 
     clickSubmitBtn(text) {
@@ -17,11 +27,11 @@ class globalFormPage {
         // cy.wait(3000);
     }
 
-    verifyRegistrationSuccess(message){
+    verifyWithAlert(message){
         cy.on('window:alert', (a) => {
             expect(a).to.eq(message)
         })
-        cy.wait(5000)
+        cy.wait(3000)
     }
 }
 
