@@ -11,20 +11,20 @@ describe('Login', () => {
   })
 
    it('With valid data', () => {
-      globalFormPage.inputUsername('vian123',input_login_username);
-      globalFormPage.inputPassword('vian123',input_login_password);
+      globalFormPage.inputFormText('vian123',input_login_username);
+      globalFormPage.inputFormText('vian123',input_login_password);
       globalFormPage.clickSubmitBtn('Log in');
       globalFormPage.verifyWithAlert('Log in successful.');
     })
     it('With invalid data - empty input', () => {
-      globalFormPage.inputUsernameEmpty(input_login_username);
-      globalFormPage.inputPasswordEmpty(input_login_password);
+      globalFormPage.inputFormTextEmpty(input_login_username);
+      globalFormPage.inputFormTextEmpty(input_login_password);
       globalFormPage.clickSubmitBtn('Log in');
       globalFormPage.verifyWithAlert('Please fill out Username and Password.');
     })
     it('With invalid data - user does not exist', () => {
-      globalFormPage.inputUsername(faker.person.firstName() + "123",input_login_username);
-      globalFormPage.inputPassword("vian123",input_login_password);
+      globalFormPage.inputFormText(faker.person.firstName() + "123",input_login_username);
+      globalFormPage.inputFormText("vian123",input_login_password);
       globalFormPage.clickSubmitBtn('Log in');
       globalFormPage.verifyWithAlert('User does not exist.');
     })

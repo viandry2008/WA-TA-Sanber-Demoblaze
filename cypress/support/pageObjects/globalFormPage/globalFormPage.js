@@ -2,22 +2,12 @@ const globalFormLocator = require("./globalFormLocator");
 
 class globalFormPage {
 
-    inputUsername(username,locator) {
+    inputFormText(name,locator) {
         cy.wait(3000);
-        cy.get(locator).should('be.visible').type(username);
+        cy.get(locator).should('be.visible').type(name);
     }
-
-    inputPassword(password,locator) {
-        cy.wait(3000);
-        cy.get(locator).should('be.visible').type(password);
-    }
-
-    inputUsernameEmpty(locator) {
-        cy.wait(3000);
-        cy.get(locator).clear();
-    }
-
-    inputPasswordEmpty(locator) {
+    
+    inputFormTextEmpty(locator) {
         cy.wait(3000);
         cy.get(locator).clear();
     }
